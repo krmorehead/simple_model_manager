@@ -1,13 +1,16 @@
 version: '3.8'
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        - MODEL_TYPE
+        - MODEL_PATH
+        - FLASK_ENV
+        - LOG_LEVEL
     ports:
       - "7000:5000"
-    environment:
-      - FLASK_ENV=development
-      - MODEL_TYPE=nllb-600m
-      - MODEL_PATH=/models/nllb-600m
-      - LOG_LEVEL=INFO
+    env_file:
+      - sample.env
     volumes:
       - .:/app

@@ -9,10 +9,18 @@ RUN pip install --user --no-cache-dir -r requirements.txt
 # Production image
 FROM python:3.9-slim
 WORKDIR /app
-ENV FLASK_ENV=production \
-    MODEL_TYPE=nllb-600m \
-    MODEL_PATH=/models/nllb-600m \
-    LOG_LEVEL=INFO
+
+# Accept model config as build arguments (can be set via --build-arg or from .env)
+ARG MODEL_TYPE=nllb-600m
+ARG MODEL_PATH=/models/nllb-600m
+ARG FLASK_ENV=production
+ARG LOG_LEVEL=INFO
+
+# Set environment variables in the image
+ENV MODEL_TYPE=${MODEL_TYPE} \
+    MODEL_PATH=${MODEL_PATH} \
+    FLASK_ENV=${FLASK_ENV} \
+    LOG_LEVEL=${LOG_LEVEL}
 
 # Copy only necessary files
 COPY --from=builder /root/.local /root/.local

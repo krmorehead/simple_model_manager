@@ -3,7 +3,7 @@ services:
   app:
     build: .
     ports:
-      - "5000:5000"
+      - "7000:5000"
     environment:
       - FLASK_ENV=development
       - MODEL_TYPE=nllb-600m

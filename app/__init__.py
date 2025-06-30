@@ -13,6 +13,9 @@ def create_app() -> Flask:
     from app.routes.translate import translate_bp
     app.register_blueprint(translate_bp)
 
+    from app.routes.splash import splash_bp
+    app.register_blueprint(splash_bp)
+
     @app.route('/health', methods=['GET'])
     def health_check():
         return jsonify({"status": "ok"}), 200

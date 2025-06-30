@@ -22,4 +22,7 @@ This document describes the testing strategy for the Simple Model Manager projec
 - `tests/test_translate_route.py`: Unit tests for `/translate` endpoint, including valid requests, missing fields, and error handling using Flask's test client and monkeypatching.
 - `tests/test_translate_route.py`: Unit test for `/languages` endpoint, verifying correct response and content.
 
+## File Parser Service Tests
+- `tests/test_file_parser.py`: Unit tests for `FileParser` stubs, covering format detection, parsing, leaf extraction, and validation methods.
+
 This file will be updated as the test suite evolves. 

@@ -25,3 +25,14 @@ tests/
 - **tests/**: Unit and integration tests
 
 This file will be updated as the architecture evolves. 
+
+## Flask Application Factory
+The app uses a factory pattern in `app/__init__.py`:
+- `create_app()` initializes and returns a Flask app instance.
+- Registers a `/health` endpoint for health checks.
+
+## Configuration Management
+- `config/settings.py` provides a `Config` class that loads environment variables for model selection and app settings.
+
+## Application Entry Point
+- `run.py` creates the app and runs it on port 5000 (container default). 

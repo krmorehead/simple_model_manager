@@ -18,7 +18,7 @@ def generate():
     language = data.get('language')
     # Send to /translate endpoint (simulate as if from client)
     # For now, use requests to call local API (could refactor to call service directly)
-    resp = requests.post('http://localhost:5000/api/translate', json={
+    resp = requests.post('http://localhost:5000/api/translate/', json={
         'text': yaml_text,
         'source_lang': 'en',
         'target_lang': language

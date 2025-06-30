@@ -36,3 +36,9 @@ The app uses a factory pattern in `app/__init__.py`:
 
 ## Application Entry Point
 - `run.py` creates the app and runs it on port 5000 (container default). 
+
+## Service Layer
+- `app/services/model_service.py`: Contains `ModelService`, responsible for loading the language model and providing a `translate` method. This service is used by the translation route for all inference operations.
+
+## API Endpoints
+- `/translate` (POST): Accepts JSON with `text`, `source_lang`, and `target_lang`. Calls `ModelService.translate` and returns the translation result. Registered via a Flask blueprint in `app/routes/translate.py` and integrated in the app factory. 

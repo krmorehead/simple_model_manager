@@ -28,4 +28,7 @@ This document describes the testing strategy for the Simple Model Manager projec
 ## Translation Service Tests
 - `tests/test_translation_service.py`: Unit tests for `TranslationService` stubs, covering prompt building, batch translation, error handling, and caching methods.
 
+## Reconstruction Service Tests
+- `tests/test_reconstruction_service.py`: Unit tests for `ReconstructionService` stubs, covering value replacement and type/formatting preservation methods.
+
 This file will be updated as the test suite evolves. 

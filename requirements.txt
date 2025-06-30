@@ -4,3 +4,4 @@ pyyaml
 transformers
 torch
 flask-restx
+python-dotenv

@@ -38,5 +38,25 @@ docker-compose up --build
 ```
 Then access the app at http://localhost:7000
 
+## Production Deployment
+- Set environment variables in a `.env` file or via your deployment platform.
+- Build and run the Docker container:
+  ```bash
+  docker-compose -f docker-compose.yml up --build -d
+  ```
+- Access the app at http://localhost:7000
+
+## Environment Variables
+- See `.env.example` for all supported variables.
+
+## Troubleshooting
+- Check logs for errors (`docker-compose logs` or container logs).
+- Ensure all environment variables are set correctly.
+- For model download issues, verify model path and permissions.
+- For port conflicts, change the `ports` mapping in `docker-compose.yml`.
+
+## CI/CD
+- Recommended: Set up GitHub Actions for automated testing and deployment.
+
 ## Next Steps
 - See the project plan for further milestones and instructions.

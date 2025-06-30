@@ -13,7 +13,29 @@ class ReconstructionService:
         Returns:
             Union[Dict, List]: The reconstructed data structure.
         """
-        # TODO: Implement value replacement logic
+        def set_by_path(obj, path, value):
+            parts = []
+            for p in path.replace(']', '').split('.'):
+                if '[' in p:
+                    k, *idxs = p.split('[')
+                    if k:
+                        parts.append(k)
+                    parts.extend(int(i) for i in idxs if i)
+                else:
+                    parts.append(p)
+            ref = obj
+            for p in parts[:-1]:
+                if isinstance(p, int):
+                    ref = ref[p]
+                else:
+                    ref = ref[p]
+            last = parts[-1]
+            if isinstance(last, int):
+                ref[last] = value
+            else:
+                ref[last] = value
+        for path, value in replacements:
+            set_by_path(data, path, value)
         return data
 
     def preserve_types_and_formatting(self, original: Any, new_value: Any) -> Any:
@@ -25,5 +47,4 @@ class ReconstructionService:
         Returns:
             Any: The value with preserved type/formatting (stub).
         """
-        # TODO: Implement type/formatting preservation logic
         return new_value 

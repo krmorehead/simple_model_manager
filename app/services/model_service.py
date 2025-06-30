@@ -1,5 +1,8 @@
 from typing import Any
 from config.settings import Config
+from app.services.file_parser import FileParser
+from app.services.reconstruction_service import ReconstructionService
+import yaml
 
 class ModelService:
     """
@@ -8,6 +11,8 @@ class ModelService:
     def __init__(self, config: Config) -> None:
         self.config = config
         self.model = self._load_model()
+        self.file_parser = FileParser()
+        self.reconstructor = ReconstructionService()
 
     def _load_model(self) -> Any:
         """
@@ -28,5 +33,23 @@ class ModelService:
         Returns:
             str: The translated text (stub).
         """
-        # TODO: Implement translation logic
-        return "" 
+        # Detect and parse YAML
+        if self.file_parser.detect_format(text) != 'yaml':
+            return text  # Only handle YAML for now
+        data = self.file_parser.parse(text)
+        if data is None:
+            return text
+        # Extract leaves
+        leaves = self.file_parser.extract_leaf_nodes(data)
+        # Mock translate each leaf (append ' (translated)')
+        translated = []
+        for path, value in leaves:
+            if isinstance(value, str):
+                new_value = value + ' (translated)'
+            else:
+                new_value = value
+            translated.append((path, new_value))
+        # Reconstruct structure
+        result = self.reconstructor.replace_values(data, translated)
+        # Dump back to YAML
+        return yaml.safe_dump(result, allow_unicode=True) 

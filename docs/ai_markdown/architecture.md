@@ -44,7 +44,7 @@ The app uses a factory pattern in `app/__init__.py`:
 - `app/services/reconstruction_service.py`: Provides the `ReconstructionService` class for path-based value replacement and data structure reconstruction, preserving types and formatting.
 
 ## API Endpoints
-- `/translate` (POST): Accepts JSON with `text`, `source_lang`, and `target_lang`. Calls `ModelService.translate` and returns the translation result. Registered via a Flask blueprint in `app/routes/translate.py` and integrated in the app factory. 
+- `/translate` (POST): Accepts JSON for text translation or multipart/form-data for file translation. Handles file uploads (JSON/YAML), parameter validation (`translate_from`, `translate_to`, `export_format`), and response formatting. Returns translation or file translation result.
 
 ## Language Code Management
 - `app/utils/language_codes.py`: Provides a two-digit code to language name mapping, language code validation, and supported language enumeration utilities. Used by the `/languages` endpoint for supported language listing. 

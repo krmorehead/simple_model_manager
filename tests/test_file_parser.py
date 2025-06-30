@@ -19,4 +19,14 @@ def test_extract_leaf_nodes_stub(parser: FileParser) -> None:
 
 def test_is_valid_format_stub(parser: FileParser) -> None:
     assert parser.is_valid_format('{"a": 1}') is False
-    assert parser.is_valid_format('a: 1') is False 
+    assert parser.is_valid_format('a: 1') is False
+
+def test_sample_json_file_fixture(sample_json_file) -> None:
+    content = sample_json_file.read().decode('utf-8')
+    assert isinstance(content, str)
+    assert 'a' in content
+
+def test_sample_yaml_file_fixture(sample_yaml_file) -> None:
+    content = sample_yaml_file.read().decode('utf-8')
+    assert isinstance(content, str)
+    assert 'a' in content 

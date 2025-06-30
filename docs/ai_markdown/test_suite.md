@@ -31,4 +31,8 @@ This document describes the testing strategy for the Simple Model Manager projec
 ## Reconstruction Service Tests
 - `tests/test_reconstruction_service.py`: Unit tests for `ReconstructionService` stubs, covering value replacement and type/formatting preservation methods.
 
+## Test Configuration
+- `pytest.ini`: Pytest configuration for test discovery and warnings.
+- `tests/conftest.py`: Test fixtures for sample JSON and YAML files, used in file parser and translation tests.
+
 This file will be updated as the test suite evolves. 

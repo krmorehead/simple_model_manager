@@ -25,4 +25,7 @@ This document describes the testing strategy for the Simple Model Manager projec
 ## File Parser Service Tests
 - `tests/test_file_parser.py`: Unit tests for `FileParser` stubs, covering format detection, parsing, leaf extraction, and validation methods.
 
+## Translation Service Tests
+- `tests/test_translation_service.py`: Unit tests for `TranslationService` stubs, covering prompt building, batch translation, error handling, and caching methods.
+
 This file will be updated as the test suite evolves. 

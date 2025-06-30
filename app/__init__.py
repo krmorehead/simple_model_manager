@@ -11,7 +11,7 @@ def create_app() -> Flask:
     app.logger.setLevel(log_level)
 
     from app.routes.translate import translate_bp
-    app.register_blueprint(translate_bp)
+    app.register_blueprint(translate_bp, url_prefix='/api')
 
     from app.routes.splash import splash_bp
     app.register_blueprint(splash_bp)

@@ -1,11 +1,29 @@
 # syntax=docker/dockerfile:1
-FROM python:3.9-slim
 
+# Builder stage
+FROM python:3.9-slim AS builder
 WORKDIR /app
+COPY requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+# Production image
+FROM python:3.9-slim
+WORKDIR /app
+ENV FLASK_ENV=production \
+    MODEL_TYPE=nllb-600m \
+    MODEL_PATH=/models/nllb-600m \
+    LOG_LEVEL=INFO
 
+# Copy only necessary files
+COPY --from=builder /root/.local /root/.local
+ENV PATH=/root/.local/bin:$PATH
 COPY . .
+
+# Placeholder for model download (uncomment and customize as needed)
+# RUN mkdir -p /models/nllb-600m && \
+#     wget -O /models/nllb-600m/model.bin <MODEL_URL>
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD curl -f http://localhost:5000/health || exit 1
 
 CMD ["flask", "run", "--host=0.0.0.0"]

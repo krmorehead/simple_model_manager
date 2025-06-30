@@ -1,9 +1,13 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for
 import requests
 
 splash_bp = Blueprint('splash', __name__)
 
 @splash_bp.route('/', methods=['GET'])
+def root():
+    return redirect(url_for('splash.splash'))
+
+@splash_bp.route('/splash', methods=['GET'])
 def splash():
     return render_template('splash.html')
 

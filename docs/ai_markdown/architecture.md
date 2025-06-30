@@ -42,3 +42,6 @@ The app uses a factory pattern in `app/__init__.py`:
 
 ## API Endpoints
 - `/translate` (POST): Accepts JSON with `text`, `source_lang`, and `target_lang`. Calls `ModelService.translate` and returns the translation result. Registered via a Flask blueprint in `app/routes/translate.py` and integrated in the app factory. 
+
+## Language Code Management
+- `app/utils/language_codes.py`: Provides a two-digit code to language name mapping, language code validation, and supported language enumeration utilities. Used by the `/languages` endpoint for supported language listing. 

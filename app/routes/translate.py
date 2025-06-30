@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app
 from app.services.model_service import ModelService
 from config.settings import Config
+from app.utils.language_codes import get_supported_languages, get_language_name
 
 translate_bp = Blueprint('translate', __name__)
 
@@ -21,4 +22,14 @@ def translate() -> tuple:
         return jsonify({'error': f'Missing field: {str(e)}'}), 400
     except Exception as e:
         # TODO: Add proper error handling/logging
-        return jsonify({'error': 'Internal server error'}), 500 
+        return jsonify({'error': 'Internal server error'}), 500
+
+@translate_bp.route('/languages', methods=['GET'])
+def list_languages() -> tuple:
+    try:
+        codes = get_supported_languages()
+        languages = [{"code": code, "name": get_language_name(code)} for code in codes]
+        return jsonify({"languages": languages}), 200
+    except Exception as e:
+        # TODO: Add proper error handling/logging
+        return jsonify({"error": "Internal server error"}), 500 

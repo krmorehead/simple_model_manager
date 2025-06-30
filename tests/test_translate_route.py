@@ -37,4 +37,12 @@ def test_translate_internal_error(monkeypatch, client) -> None:
         'target_lang': 'fr'
     })
     assert response.status_code == 500
-    assert 'error' in response.get_json() 
+    assert 'error' in response.get_json()
+
+def test_list_languages(client) -> None:
+    response = client.get('/languages')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert 'languages' in data
+    assert isinstance(data['languages'], list)
+    assert any(lang['code'] == 'en' and lang['name'] == 'English' for lang in data['languages']) 

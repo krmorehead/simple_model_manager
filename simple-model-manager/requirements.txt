@@ -1,0 +1,5 @@
+Flask
+pytest
+pyyaml
+transformers
+torch
